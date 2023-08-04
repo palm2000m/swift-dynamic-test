@@ -15,7 +15,8 @@ const resources = {
       "Connect API": "การเชื่อมต่อ API",
       "Form & Table": "การจัดการหน้าฟอร์ม",
       "EN": "อังกฤษ",
-      "TH": "ไทย"
+      "TH": "ไทย",
+      "Home page": "กลับหน้าหลัก"
     }
   },
   en: {
@@ -28,7 +29,8 @@ const resources = {
       "Connect API": "Connect API",
       "Form & Table": "Form & Table",
       "EN": "EN",
-      "TH": "TH"
+      "TH": "TH",
+      "Home page": "Home page"
     }
   }
 };

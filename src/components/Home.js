@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Home({t, languageChange}) {
   return (
     <div>
@@ -9,6 +11,9 @@ export default function Home({t, languageChange}) {
             <option value="th">{t("TH")}</option>
           </select>
         </header>
+        <Link to="/">
+          <button className="btn-home">{t("Home page")}</button>
+        </Link>
       </div>
     </div>
   );
