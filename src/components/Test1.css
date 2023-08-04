@@ -1,0 +1,82 @@
+.box-container{
+    display: flex;
+    margin-top: 60px;
+    justify-content: space-evenly;
+}
+.gutter-row{
+    display: flex;
+    background: white;
+    height: 150px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+.gutter-row:hover{
+    background: orange;
+}
+.gutter-rows{
+    background: white;
+    display: flex;
+    height: 150px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+.gutter-rows:hover{
+    background: orange;
+}
+.symbol{
+    font-size: 170px;
+    display: flex;
+    justify-content: center;
+    margin-left: 60px;
+    color: gray;
+}
+.number-symbol{
+    font-size: 130px;
+    display: flex;
+    justify-content: center;
+    margin-left: 60px;
+    color: gray;
+}
+.second-box-container{
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+}
+.second-gutter-row{
+    display: flex;
+    background: white;
+    height: 150px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin-left: 100px;
+}
+.second-gutter-row:hover{
+    background: orange;
+}
+.third-box-container{
+    display: flex;
+    margin-top: 25px;
+    justify-content: space-evenly;
+}
+.third-gutter-row{
+    display: flex;
+    background: white;
+    height: 150px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin-right: 100px;
+}
+.third-gutter-row:hover{
+    background: orange;
+}
+.btn{
+    background: transparent;
+    border: 0 white;
+    display: flex;
+}
+.btn2{
+    background: transparent;
+    border: 0 white; 
+    display: flex;
+    justify-content: center;
+}
