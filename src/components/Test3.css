@@ -1,0 +1,17 @@
+.container-box{
+    display: flex;
+    width: 900px;
+    height: auto;
+    background: transparent;    
+    margin: auto;
+    margin-top: 15px;
+    border-radius: 0.5rem;
+    border: 3px solid gray;
+}
+.btn-clear-data{
+    background: white;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    display: flex;
+    margin-left: 30px;
+}
