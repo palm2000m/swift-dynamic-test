@@ -11,7 +11,7 @@ import {
   Table,
 } from "antd";
 import { useEffect, useState } from "react";
-import moment from 'moment';
+import moment from "moment";
 
 export default function Test3() {
   const [prefix, setPrefix] = useState("");
@@ -41,6 +41,25 @@ export default function Test3() {
   const [btnChangeName, setBtnChangeName] = useState("ส่งข้อมูล");
   const [btnCancel, setBtnCancel] = useState("ล้างข้อมูล");
   const [idNum, setIdNum] = useState(1);
+  // const [checkForm, setCheckForm] = useState([
+  //   prefix === "",
+  //   firstName === "",
+  //   lastName === "",
+  //   calender.year === "",
+  //   calender.month === "",
+  //   calender.date === "",
+  //   nationality === "",
+  //   id.part1 === "",
+  //   id.part2 === "",
+  //   id.part3 === "",
+  //   id.part4 === "",
+  //   id.part5 === "",
+  //   gender === "",
+  //   dialingCode === "",
+  //   phone === "",
+  //   passport === "",
+  //   salary === "",
+  // ]);
 
   useEffect(() => {
     localStorage.setItem("task", JSON.stringify(task));
@@ -48,17 +67,16 @@ export default function Test3() {
   }, [task]);
 
   const onReset = () => {
-    if(btnCancel === "ล้างข้อมูล"){
+    if (btnCancel === "ล้างข้อมูล") {
       form.resetFields();
       clearData();
-    }else{
-      onSave()
+    } else {
+      onSave();
     }
   };
 
   const handleInputChange = (part, value) => {
     setId((prevId) => ({ ...prevId, [part]: value }));
-    console.log(id);
   };
 
   const clearData = () => {
@@ -88,7 +106,13 @@ export default function Test3() {
       lastName,
       calender,
       nationality,
-      id,
+      id: {
+        part1: id.part1,
+        part2: id.part2,
+        part3: id.part3,
+        part4: id.part4,
+        part5: id.part5,
+      },
       gender,
       dialingCode,
       phone,
@@ -98,18 +122,15 @@ export default function Test3() {
     if (editIndex !== -1) {
       const updatedTask = { ...task };
       updatedTask[editIndex] = newTask;
-      // setTask(updatedTask);
       setEditIndex(-1);
-    } else {
+    } else{
       setTask([...task, newTask]);
     }
-    // setTask([...task, newTask]);
-    setIdNum(1)
-    console.log(task);
+    setIdNum(1);
     form.resetFields();
     clearData();
     setBtnChangeName("ส่งข้อมูล");
-    setBtnCancel("ล้างข้อมูล")
+    setBtnCancel("ล้างข้อมูล");
   };
 
   const columns = [
@@ -148,7 +169,6 @@ export default function Test3() {
   ];
 
   const data = task.map((item, index) => ({
-
     key: index.toString(),
     name: `${item.firstName}`,
     gender: `${item.gender}`,
@@ -159,15 +179,21 @@ export default function Test3() {
         onClick={() => {
           setIdNum(0);
           setBtnChangeName("บันทึก");
-          setBtnCancel("ยกเลิก")
+          setBtnCancel("ยกเลิก");
           setEditIndex(index);
-          console.log(item.calender.year);
           form.setFieldsValue({
             prefix: item.prefix,
             firstname: item.firstName,
             lastname: item.lastName,
             nationality: item.nationality,
-            birth: moment(item.calender.year + '-' + (item.calender.month + 1) + '-' + item.calender.date,  'YYYY-MM-DD'),
+            birth: moment(
+              item.calender.year +
+                "-" +
+                (item.calender.month + 1) +
+                "-" +
+                item.calender.date,
+              "YYYY-MM-DD"
+            ),
             id1: item.id.part1,
             id2: item.id.part2,
             id3: item.id.part3,
@@ -192,7 +218,6 @@ export default function Test3() {
   };
 
   const onSelectChange = (newSelectedRowKeys) => {
-    console.log("selectedRowKeys changed: ", newSelectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
@@ -218,8 +243,17 @@ export default function Test3() {
     );
     setTask(newData);
     setSelectedRowKeys([]);
-    console.log("here");
   };
+
+  // const checkFillForm = () => {
+  //   if(checkForm && btnChangeName==="ส่งข้อมูล"){
+  //     return true
+  //   }else if(!checkForm && btnChangeName==="บันทึก"){
+  //     return false
+  //   }else{
+  //     return false
+  //   }
+  // }
 
   return (
     <div>
@@ -241,7 +275,6 @@ export default function Test3() {
                     setTask(updatedTask);
                   }
                   setPrefix(value);
-                  console.log(prefix);
                 }}
               >
                 <Select.Option value="Mr.">นาย</Select.Option>
@@ -261,7 +294,6 @@ export default function Test3() {
                   setTask(updatedTask);
                 }
                 setFirstName(e.target.value);
-                console.log(firstName);
               }}
             >
               <Input />
@@ -278,7 +310,6 @@ export default function Test3() {
                   setTask(updatedTask);
                 }
                 setLastName(e.target.value);
-                console.log(lastName);
               }}
             >
               <Input />
@@ -292,15 +323,16 @@ export default function Test3() {
             >
               <DatePicker
                 onChange={(value) => {
-                  const year = value.year();
-                  const month = value.month();
-                  const date = value.date();
-                  setCalender({
-                    year: year,
-                    month: month,
-                    date: date,
-                  });
-                  console.log(calender);
+                  if (value) {
+                    const year = value.year();
+                    const month = value.month();
+                    const date = value.date();
+                    setCalender({
+                      year: year,
+                      month: month,
+                      date: date,
+                    });
+                  }
                 }}
               />
             </Form.Item>
@@ -319,7 +351,6 @@ export default function Test3() {
                     setTask(updatedTask);
                   }
                   setNationality(value);
-                  console.log(nationality);
                 }}
               >
                 <Select.Option value="thai">ไทย</Select.Option>
@@ -344,10 +375,7 @@ export default function Test3() {
                   />
                 </Form.Item>{" "}
                 -{" "}
-                <Form.Item
-                name="id2"
-                rules={[{ required: true }]}
-                >
+                <Form.Item name="id2" rules={[{ required: true }]}>
                   <Input
                     style={{ width: 150 }}
                     // value={id.part2}
@@ -355,48 +383,36 @@ export default function Test3() {
                     disabled={id.part1.length === 0 && idNum === 1}
                     onChange={(e) => handleInputChange("part2", e.target.value)}
                   />
-                </Form.Item>
-                {" "}
+                </Form.Item>{" "}
                 -{" "}
-                <Form.Item
-                name="id3"
-                rules={[{ required: true }]}
-                >
-                <Input
-                  style={{ width: 150 }}
-                  // value={id.part3}
-                  maxLength={4}
-                  disabled={id.part2.length < 4 && idNum === 1}
-                  onChange={(e) => handleInputChange("part3", e.target.value)}
-                />
-                </Form.Item>
-                {" "}
+                <Form.Item name="id3" rules={[{ required: true }]}>
+                  <Input
+                    style={{ width: 150 }}
+                    // value={id.part3}
+                    maxLength={4}
+                    disabled={id.part2.length < 4 && idNum === 1}
+                    onChange={(e) => handleInputChange("part3", e.target.value)}
+                  />
+                </Form.Item>{" "}
                 -{" "}
-                <Form.Item
-                name="id4"
-                rules={[{ required: true }]}
-                >
-               <Input
-                  style={{ width: 120 }}
-                  // value={id.part4}
-                  maxLength={3}
-                  disabled={id.part3.length < 3 && idNum === 1}
-                  onChange={(e) => handleInputChange("part4", e.target.value)}
-                />
-                </Form.Item>
-                {" "}
+                <Form.Item name="id4" rules={[{ required: true }]}>
+                  <Input
+                    style={{ width: 120 }}
+                    // value={id.part4}
+                    maxLength={3}
+                    disabled={id.part3.length < 3 && idNum === 1}
+                    onChange={(e) => handleInputChange("part4", e.target.value)}
+                  />
+                </Form.Item>{" "}
                 -{" "}
-                <Form.Item
-                name="id5"
-                rules={[{ required: true }]}
-                >
-                <Input
-                  style={{ width: 100 }}
-                  // value={id.part5}
-                  maxLength={1}
-                  disabled={id.part4.length < 3 && idNum === 1}
-                  onChange={(e) => handleInputChange("part5", e.target.value)}
-                />
+                <Form.Item name="id5" rules={[{ required: true }]}>
+                  <Input
+                    style={{ width: 100 }}
+                    // value={id.part5}
+                    maxLength={1}
+                    disabled={id.part4.length < 3 && idNum === 1}
+                    onChange={(e) => handleInputChange("part5", e.target.value)}
+                  />
                 </Form.Item>
               </Space.Compact>
             </Form.Item>
@@ -410,7 +426,6 @@ export default function Test3() {
                   setTask(updatedTask);
                 }
                 setGender(e.target.value);
-                console.log(gender);
               }}
             >
               <Radio value="male">ผู้ชาย</Radio>
@@ -433,7 +448,6 @@ export default function Test3() {
                     setTask(updatedTask);
                   }
                   setDialingCode(value);
-                  console.log(dialingCode);
                 }}
               >
                 <Select.Option value="+66">+66</Select.Option>
@@ -453,7 +467,6 @@ export default function Test3() {
                     setTask(updatedTask);
                   }
                   setPhone(e.target.value);
-                  console.log(phone);
                 }}
               >
                 <Input />
@@ -472,7 +485,6 @@ export default function Test3() {
                 setTask(updatedTask);
               }
               setPassport(e.target.value);
-              console.log(passport);
             }}
           >
             <Input />
@@ -490,7 +502,6 @@ export default function Test3() {
                   setTask(updatedTask);
                 }
                 setSalary(e.target.value);
-                console.log(salary);
               }}
             >
               <Input />
@@ -498,7 +509,12 @@ export default function Test3() {
             <Button type="clear" className="btn-clear-data" onClick={onReset}>
               {btnCancel}
             </Button>
-            <Button type="submit" className="btn-clear-data" onClick={onSave}>
+            <Button
+              type="submit"
+              className="btn-clear-data"
+              onClick={onSave}
+              // disabled={}
+            >
               {btnChangeName}
             </Button>
           </Space.Compact>
